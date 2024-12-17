@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h1>Детали горы: {{ mountain.name }}</h1>
+    <p><strong>Высота:</strong> {{ mountain.height }} м</p>
+    <p><strong>Страна:</strong> {{ mountain.country }}</p>
+    <p><strong>Регион:</strong> {{ mountain.region }}</p>
+
+    <h2>Группы, осуществлявшие восхождение:</h2>
+    <ul>
+        {% for ascent in ascents %}
+            <li>{{ ascent.group_name }} (с {{ ascent.start_date }} по {{ ascent.end_date }})</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

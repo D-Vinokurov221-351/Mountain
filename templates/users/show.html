@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h2>Профиль пользователя</h2>
+        <div class="profile-info">
+            <p><strong>Имя:</strong> {{ user.name }}</p>
+            <p><strong>Address:</strong> {{ user.address }}</p>
+            <p><strong>Login:</strong> {{ user.login }}</p>
+        </div>
+
+        <h3>Редактирование профиля</h3>
+        <form method="POST" action="{{ url_for('show_user', user_id=user.id) }}">
+            <div class="form-group">
+                <label for="name">Имя</label>
+                <input type="text" id="name" name="name" value="{{ user.name }}" required>
+            </div>
+            <div class="form-group">
+                <label for="login">Login</label>
+                <input type="login" id="login" name="login" value="{{ user.login }}" required>
+            </div>
+            <div class="form-group">
+              <label for="password_old">Старый пароль</label>
+              <input type="password" id="password_old" name="password_old">
+            </div>
+            <div class="form-group">
+                <label for="password">Новый пароль</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <button type="submit">Сохранить изменения</button>
+        </form>
+
+        <h3>Восхождения</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Гора</th>
+                    <th scope="col">Дата начала</th>
+                    <th scope="col">Дата окончания</th>
+                    <th scope="col">Название группы</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ascent in user.ascents %}
+                    <tr>
+                        <td>{{ ascent.mountain_name }}</td>
+                        <td>{{ ascent.start_date }}</td>
+                        <td>{{ ascent.end_date }}</td>
+                        <td>{{ ascent.group_name }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h3>Количество восхождений на вершины</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Гора</th>
+                    <th scope="col">Количество восхождений</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for mountain in user.mountains_with_counts %}
+                    <tr>
+                        <td>{{ mountain.mountain_name }}</td>
+                        <td>{{ mountain.ascent_count }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h1>Добавление новой группы восхождения</h1>
+    <form method="POST" action="/ascents/create">
+        <div class="mb-3">
+            <label for="group_name" class="form-label">Название группы</label>
+            <input
+                name="group_name"
+                type="text"
+                class="form-control"
+                id="group_name"
+                required
+            />
+        </div>
+        <div class="mb-3">
+            <p>{{ mountains }}</p>
+            <label for="mountain_id" class="form-label">Выберите вершину</label>
+            <select name="mountain_id" class="form-select" id="mountain_id" required>
+                {% for mountain in mountains %}
+                    <option value="{{ mountain[0] }}">{{ mountain[1] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="start_date" class="form-label">Дата начала восхождения</label>
+            <input
+                name="start_date"
+                type="date"
+                class="form-control"
+                id="start_date"
+                required
+            />
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить группу</button>
+    </form>
+</div>
+{% endblock %}
