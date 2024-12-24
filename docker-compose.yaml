@@ -1,0 +1,35 @@
+version:"3"
+
+services:
+  lab3:
+      build: .
+      ports:
+        - "3000:3000"
+      restart: always
+      volumes: 
+        - "./logs:/opt/Mountain/logs"
+      depends_on:
+        - db
+      networks:
+        front-tier:
+          ipv4_address: 172.16.0.10
+  db:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=test
+      - MYSQL_DATABASE=test
+    ports:
+      - "3306:3306"
+    restart: always
+    networks:
+      front-tier:
+        ipv4_address: 172.16.0.11
+
+networks:
+  front-tier:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.16.0.0/24"
