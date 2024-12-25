@@ -21,6 +21,7 @@ app.register_blueprint(bp_ascents)
 
 init_login_manager(app)
 
+# Хз зачем это тут
 #@app.before_request
 #def journal():
 #    query = '''
