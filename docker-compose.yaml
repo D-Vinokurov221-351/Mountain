@@ -3,7 +3,6 @@ version: "3"
 services:
   lab3:
       image: donpablo20/lab3_1
-    
       ports:
         - "3000:3000"
       restart: always
