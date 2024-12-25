@@ -12,7 +12,7 @@ services:
         - db
       networks:
         front-tier:
-          ipv4_address: 172.16.0.10
+          ipv4_address: 172.18.0.10
   db:
     image: mysql
     environment:
@@ -25,11 +25,11 @@ services:
     restart: always
     networks:
       front-tier:
-        ipv4_address: 172.16.0.11
+        ipv4_address: 172.18.0.11
 
 networks:
   front-tier:
     ipam:
       driver: default
       config:
-        - subnet: "172.16.0.0/24"
+        - subnet: "172.18.0.0/24"
