@@ -67,7 +67,6 @@ def get_climber_counts_per_mountain(connection):
         JOIN Ascents ON Ascent_Climbers.ascent_id = Ascents.id
         JOIN Mountains ON Ascents.mountain_id = Mountains.id
         GROUP BY Climbers.id, Mountains.id
-        Order by mountain_name
     '''
     cursor = connection.cursor(named_tuple=True)
     cursor.execute(query)
